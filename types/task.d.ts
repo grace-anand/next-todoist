@@ -5,3 +5,8 @@ interface Task {
   title: string;
   details: string | null;
 }
+
+interface TaskCreateInput {
+  title: string;
+  details?: string | null;
+}

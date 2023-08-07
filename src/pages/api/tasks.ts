@@ -3,7 +3,9 @@ import { prisma } from "~/server/db";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
-  req: NextApiRequest,
+  req: NextApiRequest & {
+    body: { title: string; details?: string };
+  },
   res: NextApiResponse
 ) {
   if (req.method === "GET") {
@@ -11,7 +13,10 @@ export default async function handler(
     res.status(200).json(tasks);
   } else if (req.method === "POST") {
     const task: Task = await prisma.task.create({
-      data: { title: req.body.title, details: req.body.details },
+      data: {
+        title: req?.body?.title,
+        details: req?.body?.details,
+      },
     });
     res.status(200).json(task);
   } else if (req.method === "PUT") {
