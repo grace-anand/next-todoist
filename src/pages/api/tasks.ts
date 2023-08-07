@@ -1,14 +1,24 @@
 import { prisma } from "~/server/db";
-import { type NextApiRequest, type NextApiResponse } from "next";
+
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method === "GET") {
-    const tasks = await prisma.task.findMany();
+    const tasks: Task[] = await prisma.task.findMany();
     res.status(200).json(tasks);
-  } else {
-    res.status(405).json({ message: "Method not allowed" });
+  } else if (req.method === "POST") {
+    const task: Task = await prisma.task.create({
+      data: { title: req.body.title, details: req.body.details },
+    });
+    res.status(200).json(task);
+  } else if (req.method === "PUT") {
+    const task: Task = await prisma.task.update({
+      where: { id: req.body.id },
+      data: { title: req.body.title, details: req.body.details },
+    });
+    res.status(200).json(task);
   }
 }
