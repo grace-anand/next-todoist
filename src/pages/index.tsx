@@ -6,7 +6,7 @@ import {
 export const getServerSideProps: GetServerSideProps<{
   tasks: Task[];
 }> = async () => {
-  const res = fetch("http://localhost:3000/api/tasks");
+  const res = fetch(`${process.env.NEXT_ENV_BASE_URL}/api/tasks`);
   const tasks = (await (await res).json()) as Task[];
   return {
     props: {
