@@ -22,14 +22,14 @@ export default function Home({
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <div className="flex min-h-screen flex-col items-center justify-center py-2">
         <h1 className="text-6xl font-bold">Task</h1>
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around gap-2 sm:w-full">
+        <div className="mt-6">
           {tasks.map((task) => (
             <div
+              className="m-5 rounded-md border border-blue-600 p-5"
               key={task.id}
-              className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
             >
-              <h3 className="text-2xl font-bold">{task.title}</h3>
-              <p className="mt-4 text-xl">{task.details}</p>
+              <h3 className="text-lg">{task.title}</h3>
+              <p className="mt-4 text-sm">{task.details}</p>
             </div>
           ))}
         </div>
