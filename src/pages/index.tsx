@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps<{
   };
 };
 
-const deleteTask = (id: number) => async () => {
+const deleteTask = (id: string) => async () => {
   try {
     console.log(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tasks/${id}`);
     await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tasks?id=${id}`, {
@@ -42,7 +42,7 @@ export default function Home({
             >
               <span
                 className="absolute -right-3 -top-4 rounded-full border-2 border-gray-700 bg-white px-2 py-1 text-sm hover:bg-red-400"
-                onClick={deleteTask(task.id)}
+                onClick={() => deleteTask(task.id)}
               >
                 x
               </span>
