@@ -15,16 +15,16 @@ export const getServerSideProps: GetServerSideProps<{
   };
 };
 
-const deleteTask = (id: string) => async () => {
-  try {
-    console.log(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tasks/${id}`);
-    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tasks?id=${id}`, {
-      method: "DELETE",
+const deleteTask = (id: string) => {
+  fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tasks?id=${id}`, {
+    method: "DELETE",
+  })
+    .then(() => {
+      location.reload();
+    })
+    .catch((err) => {
+      console.error(err);
     });
-    location.reload();
-  } catch (err) {
-    console.error(err);
-  }
 };
 
 export default function Home({
@@ -40,12 +40,12 @@ export default function Home({
               className="relative m-5 rounded-md border border-blue-600 p-5"
               key={task.id}
             >
-              <span
+              <button
                 className="absolute -right-3 -top-4 rounded-full border-2 border-gray-700 bg-white px-2 py-1 text-sm hover:bg-red-400"
                 onClick={() => deleteTask(task.id)}
               >
                 x
-              </span>
+              </button>
               <h3 className="text-lg">{task.title}</h3>
               <p className="mt-4 text-sm">{task.details}</p>
             </div>
