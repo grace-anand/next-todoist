@@ -46,7 +46,9 @@ export default function Home({
               >
                 x
               </button>
-              <p className="text-lg">{JSON.stringify(sampleJson)}</p>
+              <p className="whitespace-pre text-lg">
+                {JSON.stringify(sampleJson.json, null, 4)}
+              </p>
             </div>
           ))}
         </div>
