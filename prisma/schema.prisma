@@ -9,10 +9,18 @@ datasource db {
     provider = "postgresql"
     url      = env("DATABASE_URL")
 }
+
 model Task {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     title     String
     details   String?
+}
+
+model SampleJson {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    json      Json
 }
