@@ -14,8 +14,8 @@ export default async function handler(
   } else if (req.method === "POST") {
     const task: Task = await prisma.task.create({
       data: {
-        title: req?.body?.event_name,
-        details: req?.body?.data,
+        title: req?.body?.body?.event_name || "No Body",
+        details: req?.body,
       },
     });
     res.status(200).json(task);
